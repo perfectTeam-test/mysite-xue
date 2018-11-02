@@ -22,11 +22,11 @@ Including another URLconf
 
 # from django.contrib import admin
 from django.urls import path
-
-
 from . import views
 
-
 urlpatterns = [
-    path('list', views.search),
+    path('environment/list', views.list),
+    path ('environment/add', views.addOne),
+    path ('environment/del', views.delOne),
+    path ('environment/update', views.updateOne),
 ]

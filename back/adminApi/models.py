@@ -1,20 +1,21 @@
 from django.db import models
-
+import datetime
 
 class Environment(models.Model):
-    id = models.IntegerField()
     name = models.CharField(max_length=64)
     dbHost = models.CharField(max_length=64)
     dbName = models.CharField(max_length=64)
     dbUsername = models.CharField(max_length=64)
     dbPassword = models.CharField(max_length=128)
     dbProt = models.IntegerField()
-    class Meta:
-        db_table = 'environment'  # 自定义表名称为mytable
-        app_label = ''
+    createTime = models.DateTimeField(default=datetime.datetime.now())
 
-    def __unicode__(self):
-        return self.name
+    # class Meta:
+    #     db_table = 'environment'  # 自定义表名称为mytable
+    #     app_label = ''
+    #
+    # def __unicode__(self):
+    #     return self.name
 
 # class dbmethod(models.Model):
 #     id = models.IntegerField()
