@@ -1,27 +1,27 @@
 # coding:utf-8
 # Create your views here.
 
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from adminApi import models
 import datetime
 import json
 
 
-def search(request):
-    # content = request.GET['param']
-    try:
-        # books = serializers.serialize("json",Books.objects.filter(book_name__contains=content))
-        res = {
-            "code": 200,
-            "data": []
-        }
-        print(res)
-    except Exception as e:
-        res = {
-            "code": 0,
-            "errMsg": e
-        }
-    return HttpResponse(json.dumps(res), content_type="application/json")
+# def search(request):
+#     # content = request.GET['param']
+#     try:
+#         # books = serializers.serialize("json",Books.objects.filter(book_name__contains=content))
+#         res = {
+#             "code": 200,
+#             "data": []
+#         }
+#         print(res)
+#     except Exception as e:
+#         res = {
+#             "code": 0,
+#             "errMsg": e
+#         }
+#     return HttpResponse(json.dumps(res), content_type="application/json")
 
 
 def list(request):
@@ -29,8 +29,9 @@ def list(request):
     return HttpResponse(environments, content_type="application/json")
 
 def addOne(request):
+
     if request.method == 'POST':
-        name = request.POST.get ('name', None)
+        name = request.POST.get('name', None)
         dbHost = request.POST.get('dbHost', None)
         dbName= request.POST.get('dbName', None)
         dbUsername= request.POST.get('dbUsername', None)
@@ -38,32 +39,29 @@ def addOne(request):
         dbProt= request.POST.get('dbProt', None)
         createTime= datetime.datetime.now()
         models.Environment.objects.create(name=name,dbHost=dbHost,dbName=dbName,dbUsername=dbUsername,dbPassword=dbPassword,dbProt=dbProt,createTime=createTime)
+    return HttpResponse(format(), content_type="application/json")
 
-    return HttpResponse ({"code":10000,"msg":"success"}, content_type="application/json")
-
-def formatRes(res):
-
-
-
-
-    #     exit(111)
-    #
-    # s = models.Environment.objects.create(name = request.POST.get('name', None),
-    #     dbHost = request.POST.get('dbHost', None),
-    #     dbName= request.POST.get('dbName', None),
-    #     dbUsername= request.POST.get('dbUsername', None),
-    #     dbPassword= request.POST.get('dbPassword', None),
-    #     dbProt= request.POST.get('dbProt', None),
-    #     createTime= datetime.datetime.now()),
-    # # environments = models.Environment.objects.all().values()
-    # return HttpResponse(s, content_type="application/json")
+def format(data=[],code = 10000, msg = '成功'):
+    return json.dumps({"code": "10000", "msg": "success","data":data})
 
 def delOne(request):
-    environments = models.Environment.objects.all().values()
-    return HttpResponse(environments, content_type="application/json")
+    models.Environment.objects.filter (id = request.GET.get('id', None)).delete()
+    return HttpResponse (format(), content_type="application/json")
+
 def updateOne(request):
-    environments = models.Environment.objects.all().values()
-    return HttpResponse(environments, content_type="application/json")
+    id = request.GET.get('id', None)
+    if request.method == "GET":
+        data = models.Environment.objects.get (id=id).values()
+        return HttpResponse(format(data),content_type="application/json")
+    elif request.method == "POST":
+        name = request.POST.get('name', None)
+        dbHost = request.POST.get('dbHost', None)
+        dbName= request.POST.get('dbName', None)
+        dbUsername= request.POST.get('dbUsername', None)
+        dbPassword= request.POST.get('dbPassword', None)
+        dbProt= request.POST.get('dbProt', None)
+        models.Environment.objects.filter(id=id).update (name=name,dbHost=dbHost,dbName=dbName,dbUsername=dbUsername,dbPassword=dbPassword,dbProt=dbProt)
+        return HttpResponse(format(), content_type="application/json")
 
 # def index(request):
 #     error_msg = ''
@@ -87,15 +85,15 @@ def updateOne(request):
 #     # 如果是其他的请求
 #     return render(request, 'login.html', {'error': error_msg, 'data': userlist})
 
-
-def postLogin(request):
-
-    # print(dbName)
-    # environments = serializers.serialize("json", models.Environment.objects.all()).values_list()
-    # models.Environment.objects.create(id=id, dbName=dbName)
-    # environments = models.Environment.objects.all()
-    data = models.Environment.objects.filter(dbName='mysity').values_list()
-    return HttpResponse(data, content_type="application/json")
+#
+# def postLogin(request):
+#
+#     # print(dbName)
+#     # environments = serializers.serialize("json", models.Environment.objects.all()).values_list()
+#     # models.Environment.objects.create(id=id, dbName=dbName)
+#     # environments = models.Environment.objects.all()
+#     data = models.Environment.objects.filter(dbName='mysity').values_list()
+#     return HttpResponse(data, content_type="application/json")
 
 
 
