@@ -10,6 +10,9 @@ class Environment(models.Model):
     dbProt = models.IntegerField()
     createTime = models.DateTimeField(default=datetime.datetime.now())
 
+
+    def __unicode__(self):
+        return self.name,self.dbHost,self.dbName,self.dbUsername,self.dbPassword,self.dbProt
     # class Meta:
     #     db_table = 'environment'  # 自定义表名称为mytable
     #     app_label = ''

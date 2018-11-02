@@ -2,6 +2,7 @@
 # Create your views here.
 
 from django.http import HttpResponse,HttpResponseRedirect
+from django.core import serializers
 from adminApi import models
 import datetime
 import json
@@ -25,7 +26,11 @@ import json
 
 
 def list(request):
-    environments = models.Environment.objects.all().values()
+
+    environments = serializers.serialize("json", models.Environment.objects.all())
+    # environments = models.Environment.objects.all()
+    #
+    # print(environments)
     return HttpResponse(environments, content_type="application/json")
 
 def addOne(request):
