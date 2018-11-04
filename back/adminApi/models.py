@@ -13,9 +13,23 @@ class Environment(models.Model):
 
     def __unicode__(self):
         return self.name,self.dbHost,self.dbName,self.dbUsername,self.dbPassword,self.dbProt
-    # class Meta:
-    #     db_table = 'environment'  # 自定义表名称为mytable
-    #     app_label = ''
+    class Meta:
+        db_table = 'environment'  # 自定义表名称为mytable
+        app_label = ''
+
+class ManageSql(models.Model):
+    name = models.CharField(max_length=64)
+    sql = models.CharField(max_length=256)
+    tableName = models.CharField(max_length=64)
+
+    createTime = models.DateTimeField(default=datetime.datetime.now())
+
+    def __unicode__(self):
+        return self.name, self.sql, self.tableName
+
+    class Meta:
+        db_table = 'manageSql'  # 自定义表名称为mytable
+        app_label = ''
     #
     # def __unicode__(self):
     #     return self.name
@@ -35,10 +49,10 @@ class Environment(models.Model):
 #     class Meta:
 #         db_table = 'fields'  # 自定义表名称为mytable
 #         app_label = ''
-#
+#lass Meta:
+#         db_table = 'tables'  # 自定义表名称为mytable
+#         app_label = ''
 # class tables(models.Model):
 #     id = models.IntegerField()
 #     name = models.CharField(max_length=50)
-#     class Meta:
-#         db_table = 'tables'  # 自定义表名称为mytable
-#         app_label = ''
+#     c

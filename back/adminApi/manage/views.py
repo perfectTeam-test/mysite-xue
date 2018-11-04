@@ -7,46 +7,45 @@ from adminApi import models
 import datetime
 import json
 from django.db import connection
+from django.db import connections
 
-# def search(request):
-#     # content = request.GET['param']
-#     try:
-#         # books = serializers.serialize("json",Books.objects.filter(book_name__contains=content))
-#         res = {
-#             "code": 200,
-#             "data": []
-#         }
-#         print(res)
-#     except Exception as e:
-#         res = {
-#             "code": 0,
-#             "errMsg": e
-#         }
-#     return HttpResponse(json.dumps(res), content_type="application/json")
+class DateEncoder(json.JSONEncoder):
+    def default(self,obj):
+        if isinstance(obj,datetime.datetime):
+            return obj.strftime('%Y-%m-%d %H:%M:%S')
+        elif isinstance(obj,date):
+            return obj.strftime("%Y-%m-%d")
+        else:
+            return json.JSONEncoder.default(self,obj)
 
 
-def list(request):
+
+
+def index(request):
 
     with connection.cursor() as cursor:
-        cursor.execute('select * from environment')
+        cursor.execute('select * from manageSql')
         data = dictfetchall(cursor)
     return HttpResponse(format(data), content_type="application/json")
 
-def addOne(request):
+def getSqlData(request):
+    postBody = request.body
+    json_result = json.loads(postBody)
 
-    if request.method == 'POST':
-        name = request.POST.get('name', None)
-        dbHost = request.POST.get('dbHost', None)
-        dbName= request.POST.get('dbName', None)
-        dbUsername= request.POST.get('dbUsername', None)
-        dbPassword= request.POST.get('dbPassword', None)
-        dbProt= request.POST.get('dbProt', None)
-        createTime= datetime.datetime.now()
-        models.Environment.objects.create(name=name,dbHost=dbHost,dbName=dbName,dbUsername=dbUsername,dbPassword=dbPassword,dbProt=dbProt,createTime=createTime)
-    return HttpResponse(format(), content_type="application/json")
+    connName = json_result.get('connName', None)
+    sql = json_result.get('sql', None)
+    envName = json_result.get('envName', None)
+
+    if request.method == "POST" and connName != None and sql != None and envName != None:
+        with connections[envName + '_' + connName].cursor() as cursor:
+            cursor.execute(sql)
+            data = dictfetchall(cursor)
+    return HttpResponse(format(data), content_type="application/json")
 
 def format(data=[],code = 10000, msg = '成功'):
-    return json.dumps({"code": "10000", "msg": "success","data":data})
+    return json.dumps({"code": "10000", "msg": "success","data":data},cls=DateEncoder)
+
+
 
 def delOne(request):
     models.Environment.objects.filter (id = request.GET.get('id', None)).delete()
