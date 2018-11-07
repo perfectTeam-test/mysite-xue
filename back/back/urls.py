@@ -29,5 +29,6 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('api/', include('adminApi.environment.urls')),
     path('api/', include('adminApi.manage.urls')),
+    path('api/', include ('adminApi.balance.urls')),
     # path('api/', include('adminApi.urls'))
 ]

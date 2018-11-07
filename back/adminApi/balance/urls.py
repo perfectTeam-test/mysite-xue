@@ -25,8 +25,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('manage/index', views.index),
-    path ('manage/getmanagesql', views.getManageSqlByManageDbId),
-
-    path('manage/getsqldata', views.getSqlData),
+    path('balance/saveRechargeByUser', views.saveRechargeByUser),
 ]

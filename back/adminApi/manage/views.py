@@ -8,23 +8,18 @@ import datetime
 import json
 from django.db import connection
 from django.db import connections
-
-class DateEncoder(json.JSONEncoder):
-    def default(self,obj):
-        if isinstance(obj,datetime.datetime):
-            return obj.strftime('%Y-%m-%d %H:%M:%S')
-        elif isinstance(obj,date):
-            return obj.strftime("%Y-%m-%d")
-        else:
-            return json.JSONEncoder.default(self,obj)
-
-
-
+from adminApi.views import format,dictfetchall
 
 def index(request):
-
     with connection.cursor() as cursor:
-        cursor.execute('select * from manageSql')
+        cursor.execute('select * from manageDb')
+        data = dictfetchall(cursor)
+    return HttpResponse(format(data), content_type="application/json")
+
+
+def getManageSqlByManageDbId(request):
+    with connection.cursor() as cursor:
+        cursor.execute('select * from manageSql where manageDbId = %s',[request.GET.get('manageDbId', None)])
         data = dictfetchall(cursor)
     return HttpResponse(format(data), content_type="application/json")
 
@@ -41,10 +36,6 @@ def getSqlData(request):
             cursor.execute(sql)
             data = dictfetchall(cursor)
     return HttpResponse(format(data), content_type="application/json")
-
-def format(data=[],code = 10000, msg = '成功'):
-    return json.dumps({"code": "10000", "msg": "success","data":data},cls=DateEncoder)
-
 
 
 def delOne(request):
