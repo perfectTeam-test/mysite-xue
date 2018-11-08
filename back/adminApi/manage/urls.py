@@ -27,6 +27,5 @@ from . import views
 urlpatterns = [
     path('manage/index', views.index),
     path ('manage/getmanagesql', views.getManageSqlByManageDbId),
-
     path('manage/getsqldata', views.getSqlData),
 ]

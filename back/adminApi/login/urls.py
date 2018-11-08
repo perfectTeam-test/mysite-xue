@@ -22,15 +22,8 @@ Including another URLconf
 
 # from django.contrib import admin
 from django.urls import path
-from django.urls import include
-
+from . import views
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path('api/', include('adminApi.environment.urls')),
-    path('api/', include('adminApi.manage.urls')),
-    path('api/', include('adminApi.balance.urls')),
-    path('api/',include('adminApi.login.urls')),
-    path('api/', include('adminApi.member.urls')),
-    # path('api/', include('adminApi.urls'))
+    path ('logout', views.logout),
 ]
