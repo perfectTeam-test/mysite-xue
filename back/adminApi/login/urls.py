@@ -26,4 +26,6 @@ from . import views
 
 urlpatterns = [
     path ('logout', views.logout),
+    path ('postLogin', views.login),
+    path ('user', views.getOneUserInfoById),
 ]

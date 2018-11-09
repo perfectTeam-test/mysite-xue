@@ -1,12 +1,12 @@
 # coding:utf-8
 # Create your views here.
-import datetime
+from datetime import date, datetime
 import json
 
 
 class DateEncoder(json.JSONEncoder):
     def default(self,obj):
-        if isinstance(obj,datetime.datetime):
+        if isinstance(obj,datetime):
             return obj.strftime('%Y-%m-%d %H:%M:%S')
         elif isinstance(obj,date):
             return obj.strftime("%Y-%m-%d")
@@ -21,5 +21,5 @@ def dictfetchall(cursor):
         for row in cursor.fetchall()
     ]
 
-def format(data=[],code = 10000, msg = '成功'):
-    return json.dumps({"code": "10000", "msg": "success","data":data},cls=DateEncoder)
+def format(data=[],code = 10000, msg = 'success'):
+    return json.dumps({"code": code, "msg": msg,"data":data},cls=DateEncoder)

@@ -41,3 +41,14 @@ class ManageSql(models.Model):
 
     class Meta:
         db_table = 'manageSql'  # 自定义表名称为mytable
+
+# 后台管理员表
+class AdminUser (models.Model):
+    name = models.CharField(max_length=32)
+    password = models.CharField(max_length=256)
+    createTime = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name, self.password, self.createTime
+    class Meta:
+        db_table = 'adminUser'  # 自定义表名称为mytable
