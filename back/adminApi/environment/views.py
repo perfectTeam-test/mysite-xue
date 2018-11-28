@@ -6,7 +6,7 @@ from adminApi import models
 import datetime
 
 from django.db import connection
-from adminApi.views import format,dictfetchall
+from back.adminApi.views import format,dictfetchall
 
 def list(request):
     with connection.cursor() as cursor:
