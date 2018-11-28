@@ -1,12 +1,8 @@
 # coding:utf-8
 # Create your views here.
 
-from django.http import HttpResponse,HttpResponseRedirect
-from django.core import serializers
+from django.http import HttpResponse
 from adminApi import models
-import datetime
-import json
-from django.db import connection
 from django.db import connections
 from adminApi.views import format,dictfetchall
 
@@ -38,27 +34,3 @@ def updateOne(request):
         dbProt= request.POST.get('dbProt', None)
         models.Environment.objects.filter(id=id).update (name=name,dbHost=dbHost,dbName=dbName,dbUsername=dbUsername,dbPassword=dbPassword,dbProt=dbProt)
         return HttpResponse(format(), content_type="application/json")
-
-# def index(request):
-#     error_msg = ''
-#     userlist = []
-#     # 如果请求是post
-#     if request.method == 'POST':
-#         # 获取用户提交的数据，做是否登录成功的判断
-#         # user = request.POST.get('user', None)
-#         user = request.POST["user"]
-#         pwd = request.POST["pwd"]
-#         # temp = {'email': email, 'pwd': pwd}
-#         # userlist.append(temp)
-#         models.UserInfo.objects.create(user=user, pwd=pwd)
-#         userlist= models.UserInfo.objects.all()
-#
-#         if user == 'zhangxiaoxue' and pwd == '123456':
-#             return redirect('http://www.baidu.com')
-#             # return HttpResponse('登录成功！！！')
-#         else:
-#             error_msg = "账号或密码错误！请重新登录！"
-#     # 如果是其他的请求
-#     return render(request, 'login.html', {'error': error_msg, 'data': userlist})
-
-#

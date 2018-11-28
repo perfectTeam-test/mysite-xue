@@ -2,7 +2,7 @@
 # Create your views here.
 
 from django.http import HttpResponse,HttpResponseRedirect
-from adminApi import models
+# from adminApi import models
 import json
 from django.db import connection
 from django.db import connections
