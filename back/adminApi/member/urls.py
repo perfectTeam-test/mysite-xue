@@ -26,4 +26,5 @@ from . import views
 
 urlpatterns = [
     path('member/info', views.show),
+    path('zhuMember/info', views.zhuShow),
 ]

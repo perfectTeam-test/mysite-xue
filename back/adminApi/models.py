@@ -1,7 +1,7 @@
 from django.db import models
 import datetime
 
-# 环境表 local ult 等
+# 环境表
 class Environment(models.Model):
     name = models.CharField(max_length=64)
     host = models.CharField(max_length=64)
