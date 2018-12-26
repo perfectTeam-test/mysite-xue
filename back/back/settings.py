@@ -133,66 +133,38 @@ DATABASES = {
     # beta2
     'beta2': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'NAME': 'grampus_user',  # 你要存储数据的库名，事先要创建之
-        'USER': 'grampus',  # 数据库用户名
+        'NAME': 'useBeta2',  # 你要存储数据的库名，事先要创建之
+        'USER': 'root',  # 数据库用户名
         'PASSWORD': '123456',  # 密码
-        'HOST': '10.7.3.10',  # 主机
+        'HOST': '127.0.0.1',  # 主机
         'PORT': '3306',  # 数据库使用的端口
     },
     # dev17
     'dev17': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'NAME': 'grampus_user',  # 你要存储数据的库名，事先要创建之
-        'USER': 'grampus',  # 数据库用户名
+        'NAME': 'useBeta2',  # 你要存储数据的库名，事先要创建之
+        'USER': 'root',  # 数据库用户名
         'PASSWORD': '123456',  # 密码
-        'HOST': '10.7.8.49',  # 主机
+        'HOST': '127.0.0.1',  # 主机
         'PORT': '3306',  # 数据库使用的端口
     },
-    # 主商城user-account
-    'mryx_user-account': {
+    'local_kyCms': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'NAME': 'user-account',  # 你要存储数据的库名，事先要创建之
-        'USER': 'rd_user_acc_u',  # 数据库用户名
-        'PASSWORD': '1725..Com',  # 密码
-        'HOST': '10.2.3.29',  # 主机
+        'NAME': 'kyCms',  # 你要存储数据的库名，事先要创建之
+        'USER': 'root',  # 数据库用户名
+        'PASSWORD': 'root',  # 密码
+        'HOST': '172.16.69.181',  # 主机
         'PORT': '3306',  # 数据库使用的端口
     },
-    # 主商城mryxpay
-    'mryx_mryxpay': {
+    
+    'local_order': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'NAME': 'mryxpay',  # 你要存储数据的库名，事先要创建之
-        'USER': 'rd_mryx_u',  # 数据库用户名
-        'PASSWORD': '2027..Com',  # 密码
-        'HOST': '10.2.3.29',  # 主机
+        'NAME': 'order',  # 你要存储数据的库名，事先要创建之
+        'USER': 'root',  # 数据库用户名
+        'PASSWORD': 'root',  # 密码
+        'HOST': '172.16.69.181',  # 主机
         'PORT': '3306',  # 数据库使用的端口
-    },
-    #便利购mryxpay
-    'dev16_mryxpay': {
-        'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'NAME': 'mryxpay',  # 你要存储数据的库名，事先要创建之
-        'USER': 'grampus',  # 数据库用户名
-        'PASSWORD': '123456',  # 密码
-        'HOST': '10.7.8.22',  # 主机
-        'PORT': '3306',  # 数据库使用的端口
-    },
-    #
-    # 'local_kyCms': {
-    #     'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-    #     'NAME': 'kyCms',  # 你要存储数据的库名，事先要创建之
-    #     'USER': 'root',  # 数据库用户名
-    #     'PASSWORD': 'root',  # 密码
-    #     'HOST': '172.16.69.181',  # 主机
-    #     'PORT': '3306',  # 数据库使用的端口
-    # },
-    #
-    # 'local_order': {
-    #     'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-    #     'NAME': 'order',  # 你要存储数据的库名，事先要创建之
-    #     'USER': 'root',  # 数据库用户名
-    #     'PASSWORD': 'root',  # 密码
-    #     'HOST': '172.16.69.181',  # 主机
-    #     'PORT': '3306',  # 数据库使用的端口
-    # }
+    }
 }
 
 
