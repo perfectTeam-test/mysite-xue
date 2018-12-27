@@ -6,6 +6,9 @@ from adminApi.views import format,dictfetchall
 from adminApi import models
 import json
 
+
+# 登录登出模块
+
 def getOneUserInfoById(request):
     userId = request.GET.get('userId')
     userObj = models.AdminUser.objects.filter (id=userId).first()

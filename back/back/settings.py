@@ -126,27 +126,28 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
         'NAME': 'mysite',         # 你要存储数据的库名，事先要创建之
         'USER': 'root',         # 数据库用户名
-        'PASSWORD': 'root',     # 密码
-        'HOST': '172.16.69.181',    # 主机
+        'PASSWORD': '123456',     # 密码
+        'HOST': 'localhost',    # 主机
         'PORT': '3306',         # 数据库使用的端口
-    },
-    'local_ckk': {
+     },
+    # beta2
+    'beta2': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'NAME': 'ckk',  # 你要存储数据的库名，事先要创建之
+        'NAME': 'useBeta2',  # 你要存储数据的库名，事先要创建之
         'USER': 'root',  # 数据库用户名
-        'PASSWORD': 'root',  # 密码
-        'HOST': '172.16.69.181',  # 主机
+        'PASSWORD': '123456',  # 密码
+        'HOST': '127.0.0.1',  # 主机
         'PORT': '3306',  # 数据库使用的端口
     },
-    'ult_ckk': {
+    # dev17
+    'dev17': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'NAME': 'ckk',  # 你要存储数据的库名，事先要创建之
+        'NAME': 'useBeta2',  # 你要存储数据的库名，事先要创建之
         'USER': 'root',  # 数据库用户名
-        'PASSWORD': 'root',  # 密码
-        'HOST': '172.16.69.181',  # 主机
+        'PASSWORD': '123456',  # 密码
+        'HOST': '127.0.0.1',  # 主机
         'PORT': '3306',  # 数据库使用的端口
     },
-
     'local_kyCms': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
         'NAME': 'kyCms',  # 你要存储数据的库名，事先要创建之
@@ -155,7 +156,7 @@ DATABASES = {
         'HOST': '172.16.69.181',  # 主机
         'PORT': '3306',  # 数据库使用的端口
     },
-
+    
     'local_order': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
         'NAME': 'order',  # 你要存储数据的库名，事先要创建之

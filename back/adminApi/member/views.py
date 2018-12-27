@@ -1,19 +1,42 @@
 # coding:utf-8
 # Create your views here.
 
+# 会员管理模块
+
 from django.http import HttpResponse
 from adminApi import models
 from django.db import connections
 from adminApi.views import format,dictfetchall
 
 def show(request):
-    userId = request.GET.get ('userId', None)
+    mobile = request.GET.get ('mobile', None)
     envName = request.GET.get('envName', None)
     # todo kyCms 配置改成正确的
-    with connections[envName + '_' + "kyCms"].cursor () as cursor:
-        sql = 'SELECT * from user WHERE `userId` = %s'
-        cursor.execute (sql,[userId])
+    with connections[envName].cursor () as cursor:
+        sql = 'SELECT * from gms_users WHERE `mobile` = %s'
+        cursor.execute (sql,[mobile])
         data = dictfetchall (cursor)
+    return HttpResponse (format (data), content_type="application/json")
+
+def zhuShow(request):
+    phone_number = request.GET.get ('phone_number', None)
+    envName = request.GET.get('envName', None)
+    # todo kyCms 配置改成正确的
+    with connections[envName + '_' + 'user-account'].cursor () as cursor:
+        # 先通过手机号得到id，拿到id最后一位数字，去具体的表汇总得到具体的信息
+        idSql = 'select id from user_id_phone_number where phone_number = %s'
+        cursor.execute (idSql,[phone_number])
+        IdData = dictfetchall (cursor)
+
+        data = []
+        if IdData :
+            id = IdData[0]['id']
+            num = str(id % 10)
+            intID = str(id)
+            sql = 'select * from users'+ num + ' WHERE id ='+ intID
+            cursor.execute(sql)
+            data = dictfetchall(cursor)
+
     return HttpResponse (format (data), content_type="application/json")
 
 def delOne(request):
